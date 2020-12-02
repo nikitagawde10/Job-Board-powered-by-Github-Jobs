@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #0F1919;
+		color: #C7C7C7;
+	}
+	a {
+		color: #40CECC;
+	}
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.toggle{
+  margin-right: 3%;
+  float: right;
+  width: 100px;
+  height: 50px;
+  margin-top: 20px;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.devjobs{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: black;
+  margin-left: 35px;
+  background-color: #5865E0;
+  font-size: 50px;
+  border-radius: 5%;
+  margin-right: 35px;
+  color: white;
+  text-align: left;
+}
+.Header-box{
+  flex: auto;
+  width: 1000px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.JsonData{
+  max-width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.SearchBar{
+  text-align: center;
+ /* border: 3px solid red; */
+  max-width: 100%;
+  margin-left: 5%
+  margin-right: 5%;
+}
+.fulltimeBtn{
+  margin-left: 25px;
+}
+input[type=text] {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px gray;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 1px solid #555;
+}
+
+.searchBtn{
+  align-self: center;
+  margin-left: 3%;
+  background-color: #5865E0;
+  color: white;
+  font-size: 30px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-top: 1.5%;
+
 }

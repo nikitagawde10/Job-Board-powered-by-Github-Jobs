@@ -1,4 +1,4 @@
-Job Board Powered by GitHub Jobs
+# Job Board Powered by GitHub Jobs
 
 
 ## Step 1:Setting up the environment

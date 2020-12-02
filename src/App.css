@@ -43,7 +43,7 @@
   text-align: center;
  /* border: 3px solid red; */
   max-width: 100%;
-  margin-left: 5%
+  margin-left: 5%;
   margin-right: 5%;
 }
 .fulltimeBtn{
@@ -59,6 +59,8 @@ input[type=text] {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  background-color: white;
+  padding: 12px 20px 12px 40px;
 }
 
 input[type=text]:focus {

@@ -1,7 +1,7 @@
 import './App.css';
 import Heading from './Components/header';
-import Joblisting from './Components/job_listings';
-import SearchBar from './Components/search_bar';
+import Joblisting from './Components/Job-listings/job_listings';
+import SearchBar from './Components/Search-bar/search_bar';
 
 function App() {
   return (
@@ -9,7 +9,6 @@ function App() {
      <Heading/>
      <SearchBar/>
      <Joblisting/>
-
     </div>
   );
 }

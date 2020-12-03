@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class SearchBar extends Component {
     
 
@@ -12,6 +11,7 @@ class SearchBar extends Component {
                     <input type="text" placeholder="Filter by Location..." /> 
                         <input type="checkbox" className="fulltimeBtn" />
                          Full time only
+                    
                     <button className="searchBtn">Search</button>
                 </form>
             </div>

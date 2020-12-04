@@ -22,11 +22,12 @@ class Joblisting extends Component {
 
     render() {
         const jobList = this.state.data;
+        console.log(jobList)
         return (
             <div className="JobData-Master" col-sm-4>
 
                 {jobList.map(item => (
-                    <a href={item.how_to_apply}> 
+                    // <a href={item.how_to_apply}> 
                     <div className="jobField" col-sm-4 >
                         <div className="CompanyImage" col-sm-4>
                             <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
@@ -39,7 +40,7 @@ class Joblisting extends Component {
                         {/*  */}
                         {/* {item.description} */}
                     </div>
-                    </a>
+                    // </a>
                 ))}
 
             </div>

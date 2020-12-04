@@ -72,22 +72,21 @@ input[type=text]:focus {
 }
 .jobField{
   border: 2px solid red;
-  max-width: 30%;
+  max-width: inherit;
   margin: 1.5%;
 }
 
 .JobData-Master{
   display: flex;
   flex-wrap: wrap;
-  max-width: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
+  
+
 }
-.CompanyImage{
+.ImageName{
   max-width:100%;
 max-height:100%;
 }
-.ImageName{
+.CompanyImage{
   max-width: 25%;
   max-height: 25%;
 }

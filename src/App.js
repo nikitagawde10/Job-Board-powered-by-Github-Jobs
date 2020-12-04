@@ -3,7 +3,7 @@ import Heading from './Components/header';
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-
+import Box from '@material-ui/core/Box'
 
 class App extends Component {
 
@@ -91,20 +91,27 @@ class App extends Component {
                     <Grid container spacing={2}>
                         {jobList.map(item => (
                             <Grid item xl={4} xs={12} md={3}>
-                            <div className="jobField" col-sm-4="true" >
-                                <div className="CompanyImage" col-sm-4="true">
-                                    <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
+                                <div className="jobField" col-sm-4="true" >
+                                    <div className="CompanyImage" col-sm-4="true">
+                                        <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
+                                    </div>
+                                    {/* add timestamp if possible eg. 5 hours ago  */}
+                                    <p className="JobType">{item.type} </p>
+                                    <p className="JobTitle">{item.title}</p>
+                                    <h4 className="CompanyName">{item.company}</h4>
+                                    <p className="CompanyLocation">{item.location} </p>
+                                    {/* {item.description} */}
                                 </div>
-                                {/* add timestamp if possible eg. 5 hours ago  */}
-                                <p className="JobType">{item.type} </p>
-                                <p className="JobTitle">{item.title}</p>
-                                <h4 className="CompanyName">{item.company}</h4>
-                                <p className="CompanyLocation">{item.location} </p>
-                                {/* {item.description} */}
-                            </div>
                             </Grid>
                         ))}
                     </Grid>
+                </div>
+                <div className="LoadMoreDiv">
+                    <Box textAlign='center'>
+                        <Button variant='contained'id="loadBtn" color="primary" onClick={this.loadMoreJobs}>
+                            Load More
+                        </Button>
+                    </Box>
                 </div>
             </div>
         );

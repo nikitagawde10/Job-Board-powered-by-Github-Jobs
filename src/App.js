@@ -22,6 +22,8 @@ class App extends Component {
         this.handleTitleComExpChange = this.handleTitleComExpChange.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.getPostings = this.getPostings.bind(this);
+        this.handleFulltime = this.handleFulltime.bind(this);
+
     }
 
     componentDidMount() {

@@ -1,6 +1,3 @@
-// <Heading/>
-
-// <JobListing/>
 import './App.css';
 import Heading from './Components/header';
 import React, { Component } from 'react';
@@ -91,26 +88,23 @@ class App extends Component {
               <input type="submit" id="submitBtn" value="Search" onClick={this.handleClick}/>
             </form>
         </span>
-
         <div className="JobData-Master" col-sm-4="true">
 
             {jobList.map(item => (
-                <a href={item.how_to_apply}>
                     <div className="jobField" col-sm-4="true" >
                         <div className="CompanyImage" col-sm-4="true">
                             <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
                         </div>
-                        {/* add timestamp if possible eg. 5 hours ago */}
+                        {/* add timestamp if possible eg. 5 hours ago  */}
                         <p className="JobType">{item.type} </p>
                         <p className="JobTitle">{item.title}</p>
                         <h4 className="CompanyName">{item.company}</h4>
-                        <p className="CompanyLocation">{item.location} </p>
-                        {/*  */}
+                        <p className="CompanyLocation">{item.location} </p> 
+                       
                         {/* {item.description} */}
                     </div>
-                </a>
             ))}
-        </div>
+        </div> 
     </div>
   );}
 }

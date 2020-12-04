@@ -1,7 +1,9 @@
 import './App.css';
 import Heading from './Components/header';
 import React, { Component } from 'react';
-import Icon from '@material-ui/core/Icon';
+import { Grid } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+
 
 class App extends Component {
 
@@ -30,33 +32,32 @@ class App extends Component {
             });
     }
 
-    handleClick(e){
+    handleClick(e) {
         // console.log(this.state.titleCompanyExpertise);
         // console.log(this.state.location);
-        const {titleCompanyExpertise, location} = this.state;
-        this.setState({titleCompanyExpertise:titleCompanyExpertise, location:location })
+        const { titleCompanyExpertise, location } = this.state;
+        this.setState({ titleCompanyExpertise: titleCompanyExpertise, location: location })
         e.preventDefault();
     }
 
-    handleTitleComExpChange(e){
-        this.setState({titleCompanyExpertise: e.target.value});
+    handleTitleComExpChange(e) {
+        this.setState({ titleCompanyExpertise: e.target.value });
     }
 
-    handleLocChange(event){
-        this.setState({location: event.target.value});
+    handleLocChange(event) {
+        this.setState({ location: event.target.value });
     }
 
     render() {
         const jobListAll = this.state.allData;
-        const {titleCompanyExpertise,location } = this.state;
+        const { titleCompanyExpertise, location } = this.state;
         let jobList = [];
-        if (titleCompanyExpertise.length < 1 && location.length < 1)
-        {
+        if (titleCompanyExpertise.length < 1 && location.length < 1) {
             jobList = jobListAll;
-        } else if (titleCompanyExpertise.length < 1 && location.length > 0){
+        } else if (titleCompanyExpertise.length < 1 && location.length > 0) {
             jobList = jobListAll.filter(job => job.location.toLowerCase().indexOf(location.toLowerCase()) > -1);
 
-        } else if (titleCompanyExpertise.length > 0 && location.length < 1){
+        } else if (titleCompanyExpertise.length > 0 && location.length < 1) {
             jobList = jobListAll.filter(job => job.company.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1 ||
                 job.title.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1 ||
                 job.description.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1);
@@ -64,49 +65,50 @@ class App extends Component {
         } else {
             jobList = jobListAll.filter(job => (job.company.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1 ||
                 job.title.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1 ||
-                job.description.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1 ) &&
+                job.description.toLowerCase().indexOf(titleCompanyExpertise.toLowerCase()) > -1) &&
                 job.location.toLowerCase().indexOf(location.toLowerCase()) > -1);
         }
         return (
 
-    <div className="App">
-     <Heading/>
-        <span>
-             <form>
+            <div className="App">
+                <Heading />
+                <span>
+                    <form>
+                        <label>
+                            <input id={"TCE"} type="text" onChange={this.handleTitleComExpChange} value={this.state.titleCompanyExpertise}
+                                placeholder={"Filter by title, company, expertise.."} />
+                        </label>
 
-              <label>
-                <input id={"TCE"} type="text" onChange={this.handleTitleComExpChange} value={this.state.titleCompanyExpertise}
-                       placeholder={"Filter by title, company, expertise.."} />
-              </label>
-
-                 <label>
-                     <input id={"LOC"} type="text" name="Loc"
-                            placeholder={"Filter by location.."}
-                     onChange={this.handleLocChange}  value={this.state.location} />
-                 </label>
-
-              <input type="submit" id="submitBtn" value="Search" onClick={this.handleClick}/>
-            </form>
-        </span>
-        <div className="JobData-Master" col-sm-4="true">
-
-            {jobList.map(item => (
-                    <div className="jobField" col-sm-4="true" >
-                        <div className="CompanyImage" col-sm-4="true">
-                            <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
-                        </div>
-                        {/* add timestamp if possible eg. 5 hours ago  */}
-                        <p className="JobType">{item.type} </p>
-                        <p className="JobTitle">{item.title}</p>
-                        <h4 className="CompanyName">{item.company}</h4>
-                        <p className="CompanyLocation">{item.location} </p> 
-                       
-                        {/* {item.description} */}
-                    </div>
-            ))}
-        </div> 
-    </div>
-  );}
+                        <label>
+                            <input id={"LOC"} type="text" name="Loc"
+                                placeholder={"Filter by location.."}
+                                onChange={this.handleLocChange} value={this.state.location} />
+                        </label>
+                        <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleClick}> Search </Button>
+                    </form>
+                </span>
+                <div className="JobData-Master" col-sm-4="true">
+                    <Grid container spacing={2}>
+                        {jobList.map(item => (
+                            <Grid item xl={4} xs={12} md={3}>
+                            <div className="jobField" col-sm-4="true" >
+                                <div className="CompanyImage" col-sm-4="true">
+                                    <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
+                                </div>
+                                {/* add timestamp if possible eg. 5 hours ago  */}
+                                <p className="JobType">{item.type} </p>
+                                <p className="JobTitle">{item.title}</p>
+                                <h4 className="CompanyName">{item.company}</h4>
+                                <p className="CompanyLocation">{item.location} </p>
+                                {/* {item.description} */}
+                            </div>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </div>
+            </div>
+        );
+    }
 }
 
 

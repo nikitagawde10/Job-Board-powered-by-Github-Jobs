@@ -18,7 +18,6 @@
 }
 .devjobs{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: black;
   margin-left: 35px;
   background-color: #5865E0;
   font-size: 50px;
@@ -30,8 +29,9 @@
 .Header-box{
   flex: auto;
   width: 1000px;
-  margin-left: 5%;
-  margin-right: 5%;
+  /* margin-left: 5%;
+  margin-right: 5%; */
+  background-color: white;
 }
 .SearchBar{
   text-align: center;
@@ -64,7 +64,7 @@ input[type=text]:focus {
 .searchBtn{
   align-self: center;
   margin-left: 3%;
-  background-color: #5865E0;
+  background-color: lightblue;
   color: white;
   font-size: 30px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -72,8 +72,8 @@ input[type=text]:focus {
 }
 .jobField{
   border: 1px solid gray;
-  max-width: inherit;
-  margin: 1.5%;
+  background-color: white;
+  
 }
 
 .JobData-Master{
@@ -82,6 +82,7 @@ input[type=text]:focus {
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 1.5%;
+  background-color: #D2FDFF;
 }
 
 .ImageName{
@@ -94,10 +95,19 @@ max-height:100%;
 }
 #TCE{
   margin-left: 5%;
+  font-size: large;
 }
 #LOC{
   margin-left: 3%;
+  font-size: large;
 }
 #submitBtn{
   margin-left: 3%;
+}
+
+body{
+  background-color: lightblue;
+}
+form{
+  background-color: white;
 }

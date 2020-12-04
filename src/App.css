@@ -90,8 +90,8 @@ input[type=text]:focus {
 max-height:100%;
 }
 .CompanyImage{
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 55px;
+  max-height: 65px;
 }
 #TCE{
   margin-left: 5%;
@@ -106,11 +106,17 @@ max-height:100%;
 }
 
 body{
-  background-color: lightblue;
+  background-color: lightgray;
 }
 form{
   background-color: white;
 }
 .LoadMoreDiv{
   margin-top:1.5%;
+}
+#loadBtn{
+background-color: #5865E0;
+}
+#submitBtn{
+  background-color:#5865E0;
 }

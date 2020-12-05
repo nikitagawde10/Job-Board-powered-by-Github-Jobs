@@ -115,6 +115,7 @@ input[type=text]:focus {
   max-height: 65px;
   border-radius: 50px 20px;
   margin-left: 1.5%;
+  background-color: white;
 }
 .CompanyImage img {
   height: 58px;

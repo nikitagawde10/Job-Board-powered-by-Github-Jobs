@@ -15,16 +15,18 @@ class App extends Component {
             allData: [],
             titleCompanyExpertise: '',
             location: '',
-            page : 0,
+            page: 0,
             fulltime: false,
-
+            jobList: ''
         };
+
         this.handleClick = this.handleClick.bind(this);
         this.handleLocChange = this.handleLocChange.bind(this);
         this.handleTitleComExpChange = this.handleTitleComExpChange.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.getPostings = this.getPostings.bind(this);
         this.handleFulltime = this.handleFulltime.bind(this);
+        this.openJobDescription = this.openJobDescription.bind(this);
 
     }
 
@@ -41,22 +43,22 @@ class App extends Component {
             });
     }
 
-    getPostings(){
-        const {page,titleCompanyExpertise,location, allData, fulltime} = this.state;
+    getPostings() {
+        const { page, titleCompanyExpertise, location, allData, fulltime } = this.state; //extract state variables to be used
         let previousSearches = allData;
 
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
             targetUrl = 'https://jobs.github.com/positions.json?';
         targetUrl = targetUrl + "page=" + page.toString();
-        if(location.length > 0){
-            targetUrl = targetUrl + "&" + "location=" + location.toString();
+        if (location.length > 0) {
+            targetUrl = targetUrl + "&location=" + location.toString();
         }
-        if(titleCompanyExpertise.length > 0){
-            targetUrl = targetUrl + "&" + "description=" + titleCompanyExpertise.toString();
+        if (titleCompanyExpertise.length > 0) {
+            targetUrl = targetUrl + "&description=" + titleCompanyExpertise.toString();
         }
 
-        if(fulltime === true){
-            targetUrl = targetUrl + "&" + "full_time=" + fulltime.toString();
+        if (fulltime === true) {
+            targetUrl = targetUrl + "&full_time=" + fulltime.toString();
         }
 
         fetch(proxyUrl + targetUrl)
@@ -69,64 +71,68 @@ class App extends Component {
 
         const newArray = allData.concat(previousSearches);
         console.log("previous " + previousSearches.length);
-        console.log("Size "+newArray.length);
-        this.setState({allData: newArray});
+        console.log("Size " + newArray.length);
+        this.setState({ allData: newArray });
     }
 
-    handleClick(e){
-        const {titleCompanyExpertise, location} = this.state;
-        this.setState({titleCompanyExpertise:titleCompanyExpertise, location:location, page: 0 });
+    handleClick(e) {
+        // const {titleCompanyExpertise, location} = this.state;
+        // this.setState({titleCompanyExpertise:titleCompanyExpertise, location:location});
         this.getPostings();
         e.preventDefault();
     }
+    openJobDescription(e) {
+        
+        }
+    
 
-    handleTitleComExpChange(e){
-        this.setState({titleCompanyExpertise: e.target.value});
+    handleTitleComExpChange(e) {
+        this.setState({ titleCompanyExpertise: e.target.value });
     }
 
-    handleLocChange(event){
-        this.setState({location: event.target.value});
+    handleLocChange(event) {
+        this.setState({ location: event.target.value });
     }
 
-    handleFulltime(){
+    handleFulltime() {
         var checkBox = document.getElementById("myCheck");
-        if (checkBox.checked === true){
-            this.setState({fulltime:true});
+        if (checkBox.checked === true) {
+            this.setState({ fulltime: true });
         } else {
-            this.setState({fulltime:false});
+            this.setState({ fulltime: false });
         }
     }
 
-    handleLoadMore(){
-        var {page} = this.state;
+    handleLoadMore() {
+        var { page } = this.state;
         page = page + 1;
-        this.setState({page: page});
+        this.setState({ page: page });
         this.getPostings();
     }
 
 
     render() {
-        const {allData, page} = this.state;
-        console.log("Rendering "+allData.length);
-        console.log("page in render "+ page);
+        const { allData, page } = this.state;
+        console.log("Rendering " + allData.length);
+        console.log("page in render " + page);
         return (
 
             <div className="App">
                 <Heading />
                 <span>
                     <form className="searchForm">
-                        <SearchIcon id="searchIcon"/>
+                        <SearchIcon id="searchIcon" />
                         <label>
                             <input id={"TCE"} type="text" onChange={this.handleTitleComExpChange} value={this.state.titleCompanyExpertise}
-                                   placeholder={"Filter by title, company, expertise.."} />
+                                placeholder={"Filter by title, company, expertise.."} />
                         </label>
-                        <LocationOnIcon id="locationIcon"/>
+                        <LocationOnIcon id="locationIcon" />
                         <label>
                             <input id={"LOC"} type="text" name="Loc"
-                                   placeholder={"Filter by location.."}
-                                   onChange={this.handleLocChange} value={this.state.location} />
+                                placeholder={"Filter by location.."}
+                                onChange={this.handleLocChange} value={this.state.location} />
                         </label>
-                        <input type="checkbox" id="myCheck" onclick={this.handleFulltime}/>Full time 
+                        <input type="checkbox" id="myCheck" onclick={this.handleFulltime} />Full time
                         <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleClick}> Search </Button>
                     </form>
                 </span>
@@ -134,7 +140,9 @@ class App extends Component {
                     <Grid container spacing={2}>
                         {allData.map(item => (
                             <Grid item xl={4} xs={12} md={3}>
-                                <div className="jobField" col-sm-4="true" >
+                                {/* on click open job description */}
+                                <div className="jobField" onClick={e => console.log("Clicked")}>
+                                    {/*{item.description}*/}
                                     <div className="CompanyImage" col-sm-4="true">
                                         <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
                                     </div>
@@ -143,7 +151,7 @@ class App extends Component {
                                     <p className="JobTitle">{item.title}</p>
                                     <p className="CompanyName">{item.company}</p>
                                     <p className="CompanyLocation">{item.location} </p>
-                                    {/* {item.description} */}
+                          
                                 </div>
                             </Grid>
                         ))}
@@ -151,13 +159,14 @@ class App extends Component {
                 </div>
                 <div className="LoadMoreDiv">
                     <Box textAlign='center'>
-                        <Button variant='contained'id="loadBtn" color="primary" onClick={this.handleLoadMore}>
+                        <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}>
                             Load More
                         </Button>
                     </Box>
                 </div>
             </div>
-        );}
+        );
+    }
 }
 
 

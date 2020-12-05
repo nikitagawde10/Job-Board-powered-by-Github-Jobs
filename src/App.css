@@ -94,7 +94,7 @@ input[type=text]:focus {
   margin-left: 1.5%;
 }
 .CompanyImage img {
-  border-radius: 50%;
+  border-radius: 35%;
 }
 
 #TCE{

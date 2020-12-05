@@ -5,7 +5,9 @@ function Heading() {
     return <div className="Header-Box">
         <div className="toggle">
             toggle</div>
-        <div className="devjobs">devjobs</div>
+        <div className="devjobs">
+            <span id="title">devjobs</span>
+        </div>
     </div>
 }
 

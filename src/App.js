@@ -3,7 +3,9 @@ import Heading from './Components/header';
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box'
+import Box from '@material-ui/core/Box';
+import SearchIcon from '@material-ui/icons/Search';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 class App extends Component {
 
@@ -112,12 +114,13 @@ class App extends Component {
             <div className="App">
                 <Heading />
                 <span>
-                    <form>
+                    <form className="searchForm">
+                        <SearchIcon id="searchIcon"/>
                         <label>
                             <input id={"TCE"} type="text" onChange={this.handleTitleComExpChange} value={this.state.titleCompanyExpertise}
                                    placeholder={"Filter by title, company, expertise.."} />
                         </label>
-
+                        <LocationOnIcon id="locationIcon"/>
                         <label>
                             <input id={"LOC"} type="text" name="Loc"
                                    placeholder={"Filter by location.."}

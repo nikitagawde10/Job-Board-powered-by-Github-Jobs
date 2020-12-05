@@ -123,7 +123,7 @@ class App extends Component {
                                    placeholder={"Filter by location.."}
                                    onChange={this.handleLocChange} value={this.state.location} />
                         </label>
-                        Full time <input type="checkbox" id="myCheck" onclick={this.handleFulltime}/>
+                        <input type="checkbox" id="myCheck" onclick={this.handleFulltime}/>Full time 
                         <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleClick}> Search </Button>
                     </form>
                 </span>
@@ -138,7 +138,7 @@ class App extends Component {
                                     {/* add timestamp if possible eg. 5 hours ago  */}
                                     <p className="JobType">{item.type} </p>
                                     <p className="JobTitle">{item.title}</p>
-                                    <h4 className="CompanyName">{item.company}</h4>
+                                    <p className="CompanyName">{item.company}</p>
                                     <p className="CompanyLocation">{item.location} </p>
                                     {/* {item.description} */}
                                 </div>

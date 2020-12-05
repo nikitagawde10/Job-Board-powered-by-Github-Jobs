@@ -8,7 +8,6 @@
 	}
 }
 .toggle{
-  /* margin-right: 3%; */
   float: right;
   width: 100px;
   height: 50px;
@@ -19,7 +18,7 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: #5865E0;
   font-size: 80px;
-  border-radius: 8%;
+  border-bottom-left-radius:5%;
   padding-left: 35px;
   color: white;
   text-align: left;
@@ -96,9 +95,7 @@ input[type=text]:focus {
 }
 .CompanyImage img {
   border-radius: 50%;
-  /* border: 2px solid red; */
 }
-
 
 #TCE{
   margin-left: 5%;

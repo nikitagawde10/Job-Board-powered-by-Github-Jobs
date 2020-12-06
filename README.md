@@ -15,17 +15,17 @@ For the system we will use the following
 
 * Install the latest version of Node from the official website https://nodejs.org/en/
 * Install your favorite editor https://code.visualstudio.com/
-* Creating an application `npx create-react-app github-jobs` in the terminal. Note we use npx and not npm because By using the npx command (which is part of the   Node Package Manager (NPM) installation we’re able to execute create-react-app without the need to download and install it first. And we give the name of the project as specified
+* Creating an application `npx create-react-app job-board` in the terminal. Note we use npx and not npm because By using the npx command (which is part of the   Node Package Manager (NPM) installation we’re able to execute create-react-app without the need to download and install it first. And we give the name of the project as specified
 * Install Material UI using `npm install @material-ui/core` for the Grid layout and presentational components like buttons
 * For testing the presentational components we will be using Jest a JAvaScript testing framework `npm install jest --save-dev`
 
 ## Step 2: Folder structure of the React application
 
--Now, you’ll see 2 options on the screen cd github-jobs and npm start, navigate to the folder where your app is installed and use the command- `npm start` to see whether the initial boilerplate of React is rendering properly.
--In the folder we’re concerned with editing the app.js file src folder as it renders the html that we see in the browser. 
--The index.html file contains the root DOM node which is rendered using App.js file. The GitHub Jobs API will be scraped in the main App component.
--The header will be another functional component. We’re adopting this method to make the code cleaner and also because the Header and Search Toolbar will be static for most of the parts of the UI.
--We will also be using JSX to keep the code elegant and readable.
+* Now, you’ll see 2 options on the screen `cd job-board` and `npm start`, navigate to the folder where your app is installed and use the command `npm start` to see whether the initial boilerplate of React is rendering properly.
+* In the folder we’re concerned with editing the app.js file src folder as it renders the html that we see in the browser. 
+* The index.html file contains the root DOM node which is rendered using App.js file. The GitHub Jobs API will be scraped in the main App component.
+* The header will be another functional component. We’re adopting this method to make the code cleaner and also because the Header and Search Toolbar will be     static for most of the parts of the UI.
+* We will also be using JSX to keep the code elegant and readable.
 
 ## Step 3:Creating the different components
 

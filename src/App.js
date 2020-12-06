@@ -26,7 +26,6 @@ class App extends Component {
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.getPostings = this.getPostings.bind(this);
         this.handleFulltime = this.handleFulltime.bind(this);
-        this.openJobDescription = this.openJobDescription.bind(this);
 
     }
 
@@ -81,9 +80,7 @@ class App extends Component {
         this.getPostings();
         e.preventDefault();
     }
-    openJobDescription(e) {
-        
-        }
+    
     
 
     handleTitleComExpChange(e) {
@@ -132,7 +129,7 @@ class App extends Component {
                                 placeholder={"Filter by location.."}
                                 onChange={this.handleLocChange} value={this.state.location} />
                         </label>
-                        <input type="checkbox" id="myCheck" onclick={this.handleFulltime} />Full time
+                        <input type="checkbox" id="myCheck" onClick={this.handleFulltime} />Full time
                         <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleClick}> Search </Button>
                     </form>
                 </span>
@@ -141,7 +138,10 @@ class App extends Component {
                         {allData.map(item => (
                             <Grid item xl={4} xs={12} md={3}>
                                 {/* on click open job description */}
-                                <div className="jobField" onClick={e => console.log("Clicked")}>
+                                <div className="jobField" onClick={this.openJobDescription} value={this.state.currJobDescription} key={item.id}> 
+                                {/* key={item.id} */}
+                           
+                                {/* <div className="jobField" onClick={e => console.log("Clicked")}>  */}
                                     {/*{item.description}*/}
                                     <div className="CompanyImage" col-sm-4="true">
                                         <img src={item.company_logo} alt="Company logo" className="ImageName"></img>

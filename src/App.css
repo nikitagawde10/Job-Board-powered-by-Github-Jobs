@@ -1,12 +1,46 @@
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: #0F1919;
-		color: #C7C7C7;
-	}
-	a {
-		color: #40CECC;
-	}
+/* 1. Light Theme: Purple: #5865E0, Light Gray: #F5F6F8, White: #FFFFFF
+   2. Dark Theme: Purple: #5865E0, Dark Blue: #131822, Light Blue: #19212D */
+   /* .element {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  /* if user switches the system settings to dark mode */
+  /* this media query will be applied */
+  /* @media (prefers-color-scheme: dark) {
+    .element {
+      background-color: #000;
+      color: #fff;
+    }
+  } */ 
+  body {
+    background-color: var(--bg, #b3e5fc);
+    color: var(--bg-text, #37474f);
+    font-family: sans-serif;
+    line-height: 1.3;
+  }
+
+
+
+
+  :root{
+    --english-green-color: #1B4D3E;
 }
+
+  @media (prefers-color-scheme: dark) {
+    .jobField {
+      background-color: #19212D;
+    }
+    .JobData-Master {
+      background-color: #131822;
+    }
+    body{
+      background-color: #131822;
+    }
+    .JobTitle{
+      color: white;
+    }
+    }
 
 #title {
   position: relative;
@@ -43,13 +77,13 @@
   padding-left: 35px;
   color: white;
   text-align: left;
-  
 }
 .Header-Box{
   border-bottom-left-radius: 15%;
   background-color:  #5865E0;
   height: 90px;
 }
+
 .SearchBar{
   text-align: center;
   max-width: 100%;
@@ -182,3 +216,4 @@ background-color: #5865E0;
   padding-left: 10px;
   padding-bottom: 10px;
 }
+

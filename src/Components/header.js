@@ -1,15 +1,26 @@
-// import React, { Component } from 'react';
-// import { render } from 'react-dom';
+import { Component } from "react";
 
-function Heading() {
-    return <div className="Header-Box">
-        <div className="toggle">
-            toggle</div>
-        <div className="devjobs">
-            <span id="title">devjobs</span>
+class Heading extends Component{
+    constructor(props) {
+        super(props);
+        this.openDarkMode = this.openDarkMode.bind(this);
+    }
+    openDarkMode() {
+
+    }
+    render() {
+        return <div className="Header-Box">
+            <div className="toggle">
+                <button className="toggleBtn" onClick={this.openDarkMode}> Dark mode</button>
+            </div>
+            <div className="devjobs">
+                <span id="title">devjobs</span>
+            </div>
         </div>
-    </div>
+    }
 }
+        
+
 
 document.documentElement.classList.remove('no-js');
 

@@ -1,4 +1,4 @@
-# Job Board Powered by GitHub Jobs
+# Job Board Powered by GitHub Jobs ( http://Job-Board-Powered-By-Github-Jobs.netlify.app )
 
 The project is to create a Job board powered by Github jobs API. The key components which bonded together are 
 -The website UI to match the prototype provided
@@ -74,14 +74,14 @@ Now we have the data in JSON which can be mapped to individual items to extract 
                        ))}
 ```
 
-We use Grid component of Material UI to display all the job listings in a grid format which is responsive by adding the breakpoints for all screen resolutions ie xl={4} xs={12} md={3}
+We use Grid component of Material UI to display all the job listings in a grid format which is responsive by adding the breakpoints for all screen resolutions ie `xl={4} xs={12} md={3}`
 Now we can see all the job listings which are live on Github jobs site.
 
 ### 2. Header Component
-The header component is a functional component which we pass to the render() of App.js. It contains the header of our site which is the title and toggle button for light and dark modes. CSS attributes are used along with relative positions to match the mockups provided.
+The header component is a divison in App.js. It contains the header of our site which is the title and toggle button for light and dark modes. CSS attributes are used along with relative positions to match the mockups provided.
 
 ### 3. Implementing the Search bar functionality
-According to requirements we need to have search fields which would give us job listings based on a particular field value. To that we examine the API documentations and find out appending the search parameters in the API call will give us the required daa. So we create a form to provide 2 search input fields, a check box and a search button and create functions based on the inputs provided.
+According to requirements we need to have search fields which would give us job listings based on a particular field value. To that we examine the API documentations and find out appending the search parameters in the API call will give us the required data. So we create a form to provide 2 search input fields, a check box and a search button and create functions based on the inputs provided.
 
 #### 3.1 Filter by title, company name or expertise
 To filter job listings by title, company name or expertise(java,python) we use the attribute description by appending 
@@ -250,7 +250,7 @@ toggleTheme() {
 
 
 ### 8. Uploading the folder on Github
-Upload the project to Github so it can be accessed by netlify for deployment.
+Upload the project to Github so it can be accessed by netlify for deployment. Do not include node_modules folder and .gitignore file.
 
 ### 9. Deploying the application
 * We register for an account on netlify.com and link the Github account for accessing the repository. 

@@ -182,12 +182,14 @@ describe('Check rendering', () => {
 	    "test": "jest --coverage"
  	 },
 	```
-	4. Go to App.test.js and import the App component and begin writing the unit tests.
-	5. Since Enzyme is a JavaScript testing utility for React, it's easier to test the React component's output. Install enzyme `npm i --save-dev enzyme 		   enzyme-adapter-react-16` and import mount, shallow and render in App.test.js 
+	4. Since Enzyme is a JavaScript testing utility for React, it's easier to test the React component's output. Install enzyme `npm i --save-dev enzyme 		   enzyme-adapter-react-16` and import mount, shallow and render in App.test.js 
+	
 	```javascript
 	import {mount, shallow, render} from 'enzyme'
 	```
-	6. Our test will check whether the component App is rendering correctly or not. To do that we're going to create a snapshot of the component using Jest and 		Enzyme. Since it's our first time running the test, the snapshot will be generated at this time.
+	5. Move App.test.js in a new folder in src called `__tests__` and import the App component and let's begin writing the unit tests!
+	a. Our test will check whether the component App is rendering correctly or not. To do that we're going to create a snapshot of the component using                    Jest and Enzyme. Since it's our first time running the test, the snapshot will be generated at this time.
+		
 	```javascript
 	describe('App', () => {
 	  it('renders correctly', ()=> {
@@ -195,6 +197,29 @@ describe('Check rendering', () => {
 	    expect(wrapper).toMatchSnapshot();
 	  })
 	})
+	```
+		b. The next test will check for presence of <span> tag and if any <ul> unordered list is absent or not. This ensures that only the style we want is 		       rendering correctly using `.find('span')).toExist()` and `find('ul')).not.toExist()`
+	```javascript
+	it('checks for span and ul presence', ()=> {
+	    const wrapper = shallow(<App/>);
+	    expect(wrapper.find('span')).toExist();
+	    expect(wrapper.find('ul')).not.toExist();
+	})
+	```
+		c. Now we will check whether the div IDs and classes which are rendering the API response is running fine using the functions `toHaveDisplayName()` and `.not.toHaveDisplayName()`
+	```javascript
+	it('checks for div IDs', ()=> {
+	  const wrapper = shallow(<App/>);
+	  expect(wrapper.find('.JobField')).toHaveDisplayName('class');
+	  expect(wrapper.find('#TCE')).not.toHaveDisplayName('div');
+	  })
+	```
+		d. This test will check whether a state variable is rendering correctly using the function `toHaveState()`
+	```javascript
+	it('checks if a state is present', ()=> {
+	    const wrapper = mount(<App/>);
+	    expect(wrapper).toHaveState('allData');
+  	  })
 	```
 
 

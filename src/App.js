@@ -1,11 +1,14 @@
 import './App.css';
-import Heading from './Components/header';
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './themes/theme';
+import { GlobalStyles } from './themes/global';
 
 class App extends Component {
 
@@ -17,7 +20,8 @@ class App extends Component {
             location: '',
             page: 0,
             fulltime: false,
-            jobList: ''
+            jobList: '',
+            theme: 'light'
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -26,11 +30,12 @@ class App extends Component {
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.getPostings = this.getPostings.bind(this);
         this.handleFulltime = this.handleFulltime.bind(this);
+        this.toggleTheme = this.toggleTheme.bind(this);
 
     }
 
     componentDidMount() {
-        console.log("in component didmpunt");
+        console.log("in component did mount");
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
             targetUrl = 'https://jobs.github.com/positions.json?';
         fetch(proxyUrl + targetUrl)
@@ -80,8 +85,6 @@ class App extends Component {
         this.getPostings();
         e.preventDefault();
     }
-    
-    
 
     handleTitleComExpChange(e) {
         this.setState({ titleCompanyExpertise: e.target.value });
@@ -107,64 +110,82 @@ class App extends Component {
         this.getPostings();
     }
 
+    // The function that toggles between themes
+    toggleTheme() {
+        // if the theme is not light, then set it to dark
+        if (this.state.theme === 'light') {
+            this.setState({ theme: 'dark' });
+            // otherwise, it should be light
+        } else {
+            this.setState({ theme: 'light' });
+        }
+    };
 
     render() {
         const { allData, page } = this.state;
         console.log("Rendering " + allData.length);
         console.log("page in render " + page);
         return (
+            <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
 
-            <div className="App">
-                <Heading />
-                <span>
-                    <form className="searchForm">
-                        <SearchIcon id="searchIcon" />
-                        <label>
-                            <input id={"TCE"} type="text" onChange={this.handleTitleComExpChange} value={this.state.titleCompanyExpertise}
-                                placeholder={"Filter by title, company, expertise.."} />
-                        </label>
-                        <LocationOnIcon id="locationIcon" />
-                        <label>
-                            <input id={"LOC"} type="text" name="Loc"
-                                placeholder={"Filter by location.."}
-                                onChange={this.handleLocChange} value={this.state.location} />
-                        </label>
-                        <input type="checkbox" id="myCheck" onClick={this.handleFulltime} />Full time
+                <GlobalStyles />
+                <div className="App">
+                    <div className="Header-Box">
+                        <button onClick={this.toggleTheme} className="toggleBtn">Toggle theme</button>
+                        <div className="devjobs">
+                            <span id="title">devjobs</span>
+                        </div>
+                    </div>
+                    <span>
+                        <form className="searchForm">
+                            <SearchIcon id="searchIcon" />
+                            <label>
+                                <input id={"TCE"} type="text" onChange={this.handleTitleComExpChange} value={this.state.titleCompanyExpertise}
+                                    placeholder={"Filter by title, company, expertise.."} />
+                            </label>
+                            <LocationOnIcon id="locationIcon" />
+                            <label>
+                                <input id={"LOC"} type="text" name="Loc"
+                                    placeholder={"Filter by location.."}
+                                    onChange={this.handleLocChange} value={this.state.location} />
+                            </label>
+                            <input type="checkbox" id="myCheck" onClick={this.handleFulltime} />Full time
                         <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleClick}> Search </Button>
-                    </form>
-                </span>
-                <div className="JobData-Master" col-sm-4="true">
-                    <Grid container spacing={2}>
-                        {allData.map(item => (
-                            <Grid item xl={4} xs={12} md={3}>
-                                {/* on click open job description */}
-                                <div className="jobField" onClick={this.openJobDescription} value={this.state.currJobDescription} key={item.id}> 
-                                {/* key={item.id} */}
-                           
-                                {/* <div className="jobField" onClick={e => console.log("Clicked")}>  */}
-                                    {/*{item.description}*/}
-                                    <div className="CompanyImage" col-sm-4="true">
-                                        <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
+                        </form>
+                    </span>
+                    <div className="JobData-Master">
+                        <Grid container spacing={2}>
+                            {allData.map(item => (
+                                <Grid item xl={4} xs={12} md={3}>
+                                    {/* on click open job description */}
+                                    <div className="jobField">
+                                        {/* key={item.id} */}
+
+                                        {/* <div className="jobField" onClick={e => console.log("Clicked")}>  */}
+                                        {/*{item.description}*/}
+                                        <div className="CompanyImage">
+                                            <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
+                                        </div>
+                                        {/* add timestamp if possible eg. 5 hours ago  */}
+                                        <p className="JobType">{item.type} </p>
+                                        <p className="JobTitle">{item.title}</p>
+                                        <p className="CompanyName">{item.company}</p>
+                                        <p className="CompanyLocation">{item.location} </p>
+
                                     </div>
-                                    {/* add timestamp if possible eg. 5 hours ago  */}
-                                    <p className="JobType">{item.type} </p>
-                                    <p className="JobTitle">{item.title}</p>
-                                    <p className="CompanyName">{item.company}</p>
-                                    <p className="CompanyLocation">{item.location} </p>
-                          
-                                </div>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </div>
-                <div className="LoadMoreDiv">
-                    <Box textAlign='center'>
-                        <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}>
-                            Load More
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
+                    <div className="LoadMoreDiv">
+                        <Box textAlign='center'>
+                            <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}>
+                                Load More
                         </Button>
-                    </Box>
+                        </Box>
+                    </div>
                 </div>
-            </div>
+            </ThemeProvider>
         );
     }
 }

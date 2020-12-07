@@ -11,8 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};    
     transition: all 0.25s linear;
   }
-  JobField{
-    background: ${({theme}) => theme.jobField};
-  }
-  
+  .JobField
+        background: ${({theme}) => theme.secondary};
+        color: ${({ theme }) => theme.text};  
   `

@@ -146,9 +146,56 @@ describe('Check rendering', () => {
 })
 ```
 * The above test will take the expression in expect() and return whether the answer in the toBe() is matching with the expression or not. Once our test is passed, we can now move ahead with testing our components.
-
-
-
+* When we're adding unit tests for our jsx expressions in Jest, npm throws an error
+>   Add @babel/preset-react (https://git.io/JfeDR) to the 'presets' section of your Babel config to enable transformation.
+>   If you want to leave it as-is, add @babel/plugin-syntax-jsx (https://git.io/vb4yA) to the 'plugins' section to enable parsing.
+* To counteract this error we should do the following:
+	1. Install Babel and all it's dependecies using `npm install --save-dev @babel/preset-env` , `npm  add --dev babel-jest @babel/core @babel/preset-env`
+	2. Create a file called `babel.config.js` and write the dependencies in it
+	```javascript
+		module.exports = {
+	  plugins: [
+	    ['@babel/plugin-proposal-decorators', { legacy: true }],
+	    ['@babel/plugin-proposal-class-properties', { loose: true }],
+	    '@babel/plugin-syntax-dynamic-import',
+	    '@babel/plugin-transform-regenerator',
+	    [
+	      '@babel/plugin-transform-runtime',
+	      {
+		helpers: false,
+		regenerator: true,
+	      },
+	    ],
+	  ],
+	  presets: [
+	    "@babel/preset-flow",
+	    'module:metro-react-babel-preset',
+	  ],
+	};
+	```
+	3. Go to `package.json` and add the jest coverage in script.
+	```javascript
+	"scripts": {
+	    "start": "react-scripts start",
+	    "build": "react-scripts build",
+	    "eject": "react-scripts eject",
+	    "test": "jest --coverage"
+ 	 },
+	```
+	4. Go to App.test.js and import the App component and begin writing the unit tests.
+	5. Since Enzyme is a JavaScript testing utility for React, it's easier to test the React component's output. Install enzyme `npm i --save-dev enzyme 		   enzyme-adapter-react-16` and import mount, shallow and render in App.test.js 
+	```javascript
+	import {mount, shallow, render} from 'enzyme'
+	```
+	6. Our test will check whether the component App is rendering correctly or not. To do that we're going to create a snapshot of the component using Jest and 		Enzyme. Since it's our first time running the test, the snapshot will be generated at this time.
+	```javascript
+	describe('App', () => {
+	  it('renders correctly', ()=> {
+	    const wrapper = shallow(<App/>);
+	    expect(wrapper).toMatchSnapshot();
+	  })
+	})
+	```
 
 
 ### 7. Light/Dark Theme Toggle

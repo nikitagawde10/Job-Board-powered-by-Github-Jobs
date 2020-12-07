@@ -188,6 +188,7 @@ describe('Check rendering', () => {
 	import {mount, shallow, render} from 'enzyme'
 	```
 	5. Move App.test.js in a new folder in src called `__tests__` and import the App component and let's begin writing the unit tests!
+	
 	a. Our test will check whether the component App is rendering correctly or not. To do that we're going to create a snapshot of the component using                    Jest and Enzyme. Since it's our first time running the test, the snapshot will be generated at this time.
 		
 	```javascript
@@ -198,7 +199,9 @@ describe('Check rendering', () => {
 	  })
 	})
 	```
-		b. The next test will check for presence of <span> tag and if any <ul> unordered list is absent or not. This ensures that only the style we want is 		       rendering correctly using `.find('span')).toExist()` and `find('ul')).not.toExist()`
+	
+	b. The next test will check for presence of <span> tag and if any <ul> unordered list is absent or not. This ensures that only the style we want is 		       rendering correctly using `.find('span')).toExist()` and `find('ul')).not.toExist()`
+	
 	```javascript
 	it('checks for span and ul presence', ()=> {
 	    const wrapper = shallow(<App/>);
@@ -206,7 +209,9 @@ describe('Check rendering', () => {
 	    expect(wrapper.find('ul')).not.toExist();
 	})
 	```
-		c. Now we will check whether the div IDs and classes which are rendering the API response is running fine using the functions `toHaveDisplayName()` and `.not.toHaveDisplayName()`
+	
+	c. Now we will check whether the div IDs and classes which are rendering the API response is running fine using the functions `toHaveDisplayName()` and    	 `.not.toHaveDisplayName()`
+	
 	```javascript
 	it('checks for div IDs', ()=> {
 	  const wrapper = shallow(<App/>);
@@ -214,14 +219,14 @@ describe('Check rendering', () => {
 	  expect(wrapper.find('#TCE')).not.toHaveDisplayName('div');
 	  })
 	```
-		d. This test will check whether a state variable is rendering correctly using the function `toHaveState()`
+	d. This test will check whether a state variable is rendering correctly using the function `toHaveState()`
+		
 	```javascript
 	it('checks if a state is present', ()=> {
 	    const wrapper = mount(<App/>);
 	    expect(wrapper).toHaveState('allData');
   	  })
 	```
-
 
 ### 7. Light/Dark Theme Toggle
 * To implement the light/dark theme toggle we'll begin by installing the styled components package using `npm i styled-components`.Styled-components is a CSS-in-JS library lets you use all of the features of CSS that you love, including media queries, pseudo-selectors, and nesting. 

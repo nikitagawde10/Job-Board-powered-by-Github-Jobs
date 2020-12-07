@@ -18,6 +18,7 @@ For the system we will use the following
 * Creating an application `npx create-react-app job-board` in the terminal. Note we use npx and not npm because By using the npx command (which is part of the   Node Package Manager (NPM) installation we’re able to execute create-react-app without the need to download and install it first. And we give the name of the project as specified
 * Install Material UI using `npm install @material-ui/core` for the Grid layout and presentational components like buttons
 * For testing the presentational components we will be using Jest a JAvaScript testing framework `npm install jest --save-dev`
+* For implementing the light-dark theme toggle we will use styled components which can be installed by `npm i styled-components`
 
 ## Step 2: Folder structure of the React application
 
@@ -150,12 +151,64 @@ describe('Check rendering', () => {
 
 
 
+### 7. Light/Dark Theme Toggle
+* To implement the light/dark theme toggle we'll begin by installing the styled components package using `npm i styled-components`.Styled-components is a CSS-in-JS library lets you use all of the features of CSS that you love, including media queries, pseudo-selectors, and nesting. 
+* They provide full theming support by exporting a `<ThemeProvider>` wrapper components within itself. We will create 2 new files in a `themes` folder called `theme.js` and `global.js`. The file theme.js will include variables for our dark and light modes
+```javascript
+export const lightTheme = {
+    body: '#E2E2E2',
+    text: '#363537',
+    toggleBorder: '#FFF',
+}
 
-### 7. Uploading the folder on Github
+export const darkTheme = {
+    body: '#19212D',
+    text: '#FAFAFA',
+    toggleBorder: '#6B8096',
+    p:'#6B8096'
+}
+```
+* and the global.js file will contain base styling for the entire page
+```javascript
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyles = createGlobalStyle`
+  body {
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};    
+    transition: all 0.25s linear;
+  }`
+```
+* Next we will import the ThemeProvider from styled-components, dark.js and normal.js files in App.js which we created to store the basic color schemes and also GlobalStyles and add the default theme as `light` in our constructor.
+```javascript
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './themes/theme';
+import { GlobalStyles } from './themes/global';
+```
+* We will define a function `toggleTheme()` which will check whether the current state is toggled to dark theme or light theme
+```javascript
+toggleTheme() {
+        // if the theme is not light, then set it to dark
+        if (this.state.theme === 'light') {
+            this.setState({ theme: 'dark' });
+            // otherwise, it should be light
+        } else {
+            this.setState({ theme: 'light' });
+        }
+    };
+```
+* In the render() function we add our components of `<ThemeProvider>` and `<GlobalStyles>` and wrap our entire application within `<ThemeProvider>` so it will display the accurate theme for the entire application.
+* Now at the click of Toggle Theme button the theme of the entire application will be switched to dark mode and vice versa.
+
+
+
+### 8. Uploading the folder on Github
 Upload the project to Github so it can be accessed by netlify for deployment.
 
-### 7. Deploying the application
-We register for an account on netlify.com and link the Github account for accessing the repository. In the options provided we select the repository name and add the name of website “Job-Board-Powered-By-Github-Jobs” in the /build input field. This will be the name of the website. After clicking on deploy give it a few minutes and then the link will be live. You can visit the link at http://Job-Board-Powered-By-Github-Jobs.netlify.app
+### 9. Deploying the application
+* We register for an account on netlify.com and link the Github account for accessing the repository. 
+* In the options provided we select the repository name and add the name of website “Job-Board-Powered-By-Github-Jobs” in the /build input field. This will be the name of the website. 
+* After clicking on deploy give it a few minutes and then the link will be live. You can visit the link at http://Job-Board-Powered-By-Github-Jobs.netlify.app
 
 					 				
 			

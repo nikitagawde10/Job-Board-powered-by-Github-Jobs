@@ -245,17 +245,29 @@ export const darkTheme = {
     p:'#6B8096'
 }
 ```
-* and the global.js file will contain base styling for the entire page
+* and the `global.js` file will contain base styling for the entire page to edit the colors in the dark theme. 
 ```javascript
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-  body {
+  body & .JobData-Master{
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};    
     transition: all 0.25s linear;
+  }
+  body & {
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};    
+    transition: all 0.25s linear;
+  }
+  body
+    JobField{
+    background: ${({theme}) => theme.jobField};
+    color: ${({ theme }) => theme.text};  
   }`
 ```
+* This code is SCSS wherein we define that the body and JobData-Master class should have the theme colors as specified in `theme.js` file using nested class structure. The symbol `&` is used for nesting the 2 classes together.
+
 * Next we will import the ThemeProvider from styled-components, dark.js and normal.js files in App.js which we created to store the basic color schemes and also GlobalStyles and add the default theme as `light` in our constructor.
 ```javascript
 import { ThemeProvider } from 'styled-components';
@@ -274,6 +286,7 @@ toggleTheme() {
         }
     };
 ```
+
 * In the render() function we add our components of `<ThemeProvider>` and `<GlobalStyles>` and wrap our entire application within `<ThemeProvider>` so it will display the accurate theme for the entire application.
 * Now at the click of Toggle Theme button the theme of the entire application will be switched to dark mode and vice versa.
 

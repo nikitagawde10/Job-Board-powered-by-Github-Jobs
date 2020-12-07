@@ -21,11 +21,14 @@
   } */ 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #0F1919;
-    color: #C7C7C7;
+    background-color: #131822;
+    color: #0F1919;
   }
-  a {
-    color: #40CECC;
+  .JobData-Master{
+    background-color: #131822;
+  }
+  .jobField{
+    background-color:#19212D ;
   }
 }
 
@@ -137,6 +140,7 @@ input[type=text]:focus {
   max-height: 65px;
   border-radius: 50px 20px;
   margin-left: 1.5%;
+  background-color: white;
 }
 .CompanyImage img {
   height: 58px;

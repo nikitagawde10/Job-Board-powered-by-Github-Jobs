@@ -1,14 +1,15 @@
 export const lightTheme = {
-    body: '#E2E2E2',
-    text: '#363537',
+    body: '#E0E0E0',
+    text: '#000000',
     toggleBorder: '#FFF',
-    jobField: '#E0E0E0',
+    jobField: '#FFFFFF',
+    master:'#E0E0E0'
 }
 
 export const darkTheme = {
-    body: '#131822',
-    text: '#FAFAFA',
+    body: '#19212D',
+    text: '#000000',
     toggleBorder: '#6B8096',
     jobField:'#19212D',
-
+    master:'#131822'
 }

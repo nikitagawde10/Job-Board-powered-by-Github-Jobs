@@ -127,7 +127,6 @@ class App extends Component {
         console.log("page in render " + page);
         return (
             <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
-
                 <GlobalStyles />
                 <div className="App">
                     <div className="Header-Box">

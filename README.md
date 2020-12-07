@@ -133,7 +133,25 @@ const newArray = allData.concat(previousSearches);
 
 * Some images displayed may be stretched due to the difference in dimensions of the image retrieved by the API. We also use CSS position and text formatting features to beautify the text and match the prototype. 
 
-### 6. Uploading the folder on Github
+### 6. Unit testing
+* We will use Jest to perform unit tests. Install jest using `npm install jest --save-dev`.
+* We also have to make changes to package.json file to configure Jest. Under the scripts attribute, edit the test command to include jest. We add coverage to show what percentage of coverage(graphical representation) does the unit test provide for the components rendering. `"test":"jest --coverage",`
+* In the App.test.js file we add a sample test to check whether our Jest is configured correctly. To do that, add the following code snippet and then type the command `npm run test` in the terminal
+```javascript
+describe('Check rendering', () => {
+  it('should test that 2 - 2 === 0', () => {
+    expect(2-2).toBe(0)
+  })
+})
+```
+* The above test will take the expression in expect() and return whether the answer in the toBe() is matching with the expression or not. Once our test is passed, we can now move ahead with testing our components.
+
+
+
+
+
+
+### 7. Uploading the folder on Github
 Upload the project to Github so it can be accessed by netlify for deployment.
 
 ### 7. Deploying the application

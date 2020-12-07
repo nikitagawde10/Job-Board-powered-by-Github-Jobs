@@ -1,4 +1,7 @@
 
+import shallow, { mount } from 'enzyme'
+import App from '../App'
+
 const jobs = "Amazon";
 describe('second test', () => {
   it('should match', () => {
@@ -12,20 +15,26 @@ describe('Initial Test', () => {
   })
 })
 
-// describe('A suite', function() {
-//   it('should render without throwing an error', function() {
-//     expect(shallow(<App />).contains(<div className="App"></div>)).toBe(true);
-//   });
+describe('App', () => {
+  it('renders correctly', ()=> {
+    const wrapper = shallow(<App/>);
+    expect(wrapper).toMatchSnapshot();
+  })
 
-  // it('should be selectable by class "foo"', function() {
-  //   expect(shallow(<App />).is('.foo')).toBe(true);
-  // });
+  it('checks for span and ul presence', ()=> {
+    const wrapper = shallow(<App/>);
+    expect(wrapper.find('span')).toExist();
+    expect(wrapper.find('ul')).not.toExist();
+  })
 
-  // it('should mount in a full DOM', function() {
-  //   expect(mount(<App />).find('.foo').length).toBe(1);
-  // });
+  it('checks for div IDs', ()=> {
+  const wrapper = shallow(<App/>);
+  expect(wrapper.find('.JobField')).toHaveDisplayName('class');
+  expect(wrapper.find('#TCE')).not.toHaveDisplayName('div');
+  })
 
-  // it('should render to static HTML', function() {
-  //   expect(render(<App />).text()).toEqual('Bar');
-  // });
-// });
+  it('checks if a state is present', ()=> {
+    const wrapper = mount(<App/>);
+    expect(wrapper).toHaveState('allData');
+    })
+})

@@ -2,15 +2,13 @@ export const lightTheme = {
     body: '#E2E2E2',
     text: '#363537',
     toggleBorder: '#FFF',
- // gradient: 'linear-gradient(#39598A, #79D7ED)',
+    jobField: '#E0E0E0',
 }
 
 export const darkTheme = {
-    body: '#19212D',
+    body: '#131822',
     text: '#FAFAFA',
     toggleBorder: '#6B8096',
+    jobField:'#19212D',
 
-    // JobData-Master:'#19212D'
-
- // gradient: 'linear-gradient(#091236, #1E215D)',
 }

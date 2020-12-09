@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import Test from './Test.js'
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -198,11 +199,12 @@ class App extends Component {
                                         <p className="JobTitle">{item.title}</p>
                                         <p className="CompanyName">{item.company}</p>
                                         <p className="CompanyLocation">{item.location} </p>
-                                        <a href={item.url} className="Applyhere">Apply here</a>
-                                        {/* <a href="#lightbox-1" rel="lightbox" className="Applyhere">Open description</a>
+                                        {/* <a href={item.url} className="Applyhere">Apply here</a> */}
+                                        <a href="#lightbox-1" rel="lightbox" className="Applyhere">Open description</a>
                                         <div class="lightbox" id="lightbox-1">
-                                            {item.description}
-                                        <a class="lightbox__close" href="{item}">X</a></div> */}
+                                            {/* {item.description} */}
+                                            <Test/>
+                                        <a class="lightbox__close" href="{item}">X</a></div>
                                     </div>
                                 </Grid>
                             ))}

@@ -23,7 +23,7 @@
     color: #333;
   } */
   
-  /* .lightbox {
+  .lightbox {
     background: #fff;
     border: 8px solid rgba(0, 0, 0, 0.5);
     border-radius: 12px;
@@ -55,7 +55,7 @@
   }
   .lightbox p{
     color: red;
-  } */
+  }
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #131822;

@@ -1,14 +1,14 @@
 # Job Board Powered by GitHub Jobs ( http://Job-Board-Powered-By-Github-Jobs.netlify.app )
 
 The project is to create a Job board powered by Github jobs API. The key components which bonded together are 
--The website UI to match the prototype provided
+- The website UI to match the prototype provided
 - Use the API to show all postings currently live on the site
 - Default the user's location 
--Implement a search bar to show input fields for searching via location, job description or company and full time
--Show multiple job postings using Load More button pagination
--Open the job description of a posting when clicked on it
--Implement a dark-light mode toggle button
--Unit test the presentational components
+- Implement a search bar to show input fields for searching via location, job description or company and full time
+- Show multiple job postings using Load More button pagination
+- Open the job description of a posting when clicked on it
+- Implement a dark-light mode toggle button
+- Unit test the presentational components
 
 ## Step 1:Setting up the environment
 

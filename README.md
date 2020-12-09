@@ -109,7 +109,10 @@ We bind the functions to the Search Button’s onClick functionality to retrieve
 
 ### 4. Default user's location
 To default the user's location we're going to use the Javascript's API `navigator.geolocation`. So we write a condition in `componentDidMount()` to get the user's location accordingly. Do the following to access the user's location-
- 1. Define the latitude and longitude string which will stored in `let latitude = '';` `let longitude = '';`
+ 1. Add the following state variables in our constructor `userLoc: true` `latitude: ''` and `longitude: ''`.
+ 2. 
+            
+ 2. Define the latitude and longitude string which will stored in `let latitude = '';` `let longitude = '';`
  2. In `componentDidMount()` add to get the latitude and longitude of the user's location. We use `watchPosition()` because it attaches the handler function and executes itself as soon as the user changes their current location, returning the updated location properties for the user's new position.
  ```javascript
  navigator.geolocation.watchPosition(function(position) {

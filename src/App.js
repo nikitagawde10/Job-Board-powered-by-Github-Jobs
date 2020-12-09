@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-
+import moment from 'moment';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themes/theme';
 import { GlobalStyles } from './themes/global';
@@ -21,7 +21,7 @@ class App extends Component {
             page: 0,
             fulltime: false,
             jobList: '',
-            theme: 'light'
+            theme: 'light',
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -35,9 +35,25 @@ class App extends Component {
     }
 
     componentDidMount() {
-        console.log("in component did mount");
+        let latitiude = '';
+        let longitude = '';
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
             targetUrl = 'https://jobs.github.com/positions.json?';
+
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(function (position) {
+                latitiude = position.coords.latitude.toString();
+                console.log("Latitude is :", latitiude);
+
+                longitude = position.coords.longitude.toString();
+                console.log("Longitude is :", longitude);
+                if (targetUrl.length < 41) {
+                    targetUrl = targetUrl + "lat=" + position.coords.latitude.toString() + "&long=" + position.coords.longitude.toString();
+                }
+                console.log("first", targetUrl);
+            });
+        }
+
         fetch(proxyUrl + targetUrl)
             .then(allData => allData.json())
             .then(d => this.setState({ allData: d }))
@@ -165,8 +181,8 @@ class App extends Component {
                                         <div className="CompanyImage">
                                             <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
                                         </div>
-                                        {/* add timestamp if possible eg. 5 hours ago  */}
-                                        <p className="JobType">{item.type} </p>
+                                        
+                                        <p className="JobType">{moment(item.created_at).fromNow()} . {item.type} </p>
                                         <p className="JobTitle">{item.title}</p>
                                         <p className="CompanyName">{item.company}</p>
                                         <p className="CompanyLocation">{item.location} </p>
@@ -176,18 +192,26 @@ class App extends Component {
                             ))}
                         </Grid>
                     </div>
-                    <div className="LoadMoreDiv">
+                    {allData.length > 0 ? <div className="LoadMoreDiv">
+                        <Box textAlign='center'>
+                            <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}> Load More
+                     </Button>
+                        </Box>
+                    </div> : <div className="notFound">No Results Found..</div>}
+                    {/* <div className="LoadMoreDiv">
                         <Box textAlign='center'>
                             <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}>
                                 Load More
                         </Button>
                         </Box>
-                    </div>
+                    </div> */}
                 </div>
             </ThemeProvider>
         );
     }
 }
+
+
 
 
 export default App;

@@ -110,7 +110,8 @@ We bind the functions to the Search Button’s onClick functionality to retrieve
 ### 4. Default user's location
 To default the user's location we're going to use the Javascript's API `navigator.geolocation`. So we write a condition in `componentDidMount()` to get the user's location accordingly. Do the following to access the user's location-
  1. Add the following state variables in our constructor `userLoc: true` `latitude: ''` and `longitude: ''`.
- 2. We will define an async-await function to handle our geolocation function `position()` because we have an asynchronous function inside of an async block. So let's say we need to fetch some data from our server and then use that data within our async block. We will use await to pause the function execution and resume after the data comes in
+ 2. We will define an async-await function to handle our geolocation function `position()` because let's say we need to fetch some data from our server and then use that data within our async block. We will use await to pause the function execution and resume after the data comes in. Basically, when calling our function with the await keyword, we’re telling the async function to stop executing until the promise is resolved, at which point it can resume execution and return the resolved value. Rather than getting promises, we will get back the data that we expect.
+
 ```javascript
 position = async () => {
         await navigator.geolocation.getCurrentPosition(
@@ -124,6 +125,7 @@ position = async () => {
     };
 ```
  This will help us in storing the latitude and longitude of the user in a state variable and use it to fetch the API results. We will then call `position()` in our `componentDidMount()`.
+ 
  3. Now in our `render()` method we're going to create a button to search for jobs near the user's coordinates ie latitude and longitude and add a function called `handleJobsNearYou` on click. Then we will define the function as:
  ```javascript
  handleJobsNearYou() {

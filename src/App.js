@@ -22,6 +22,9 @@ class App extends Component {
             fulltime: false,
             jobList: '',
             theme: 'light',
+            userLoc: true,
+            latitude: '',
+            longitude: ''
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -31,29 +34,25 @@ class App extends Component {
         this.getPostings = this.getPostings.bind(this);
         this.handleFulltime = this.handleFulltime.bind(this);
         this.toggleTheme = this.toggleTheme.bind(this);
-
+        this.position = this.position.bind(this);
+        this.handleJobsNearYou = this.handleJobsNearYou.bind(this);
     }
+    position = async () => {
+        await navigator.geolocation.getCurrentPosition(
+            position => this.setState({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }, newState => console.log(newState))
+        );
+        console.log(this.state.latitude);
+        console.log(this.state.longitude);
+    };
 
     componentDidMount() {
-        let latitiude = '';
-        let longitude = '';
+        this.position();
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
             targetUrl = 'https://jobs.github.com/positions.json?';
-
-        if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(function (position) {
-                latitiude = position.coords.latitude.toString();
-                console.log("Latitude is :", latitiude);
-
-                longitude = position.coords.longitude.toString();
-                console.log("Longitude is :", longitude);
-                if (targetUrl.length < 41) {
-                    targetUrl = targetUrl + "lat=" + position.coords.latitude.toString() + "&long=" + position.coords.longitude.toString();
-                }
-                console.log("first", targetUrl);
-            });
-        }
-
+        console.log("target URL", targetUrl);
         fetch(proxyUrl + targetUrl)
             .then(allData => allData.json())
             .then(d => this.setState({ allData: d }))
@@ -66,9 +65,9 @@ class App extends Component {
     getPostings() {
         const { page, titleCompanyExpertise, location, allData, fulltime } = this.state; //extract state variables to be used
         let previousSearches = allData;
-
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
             targetUrl = 'https://jobs.github.com/positions.json?';
+
         targetUrl = targetUrl + "page=" + page.toString();
         if (location.length > 0) {
             targetUrl = targetUrl + "&location=" + location.toString();
@@ -96,8 +95,6 @@ class App extends Component {
     }
 
     handleClick(e) {
-        // const {titleCompanyExpertise, location} = this.state;
-        // this.setState({titleCompanyExpertise:titleCompanyExpertise, location:location});
         this.getPostings();
         e.preventDefault();
     }
@@ -137,6 +134,24 @@ class App extends Component {
         }
     };
 
+    handleJobsNearYou() {
+        const { latitude, longitude, } = this.state; //extract state variables to be used
+
+        var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+            targetUrl = 'https://jobs.github.com/positions.json?';
+
+        // targetUrl = targetUrl + "lat=52.52008&long=13.4050"; // Berlin co-ordinates, will get you only Berlin jobs
+        targetUrl = targetUrl + "lat=" + latitude.toString() + "&long=" + longitude.toString();
+
+        fetch(proxyUrl + targetUrl)
+            .then(allData => allData.json())
+            .then(d => this.setState({ allData: d }))
+            .catch(e => {
+                console.log(e);
+                return e;
+            });
+    }
+
     render() {
         const { allData, page } = this.state;
         console.log("Rendering " + allData.length);
@@ -166,27 +181,28 @@ class App extends Component {
                             </label>
                             <input type="checkbox" id="myCheck" onClick={this.handleFulltime} />Full time
                         <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleClick}> Search </Button>
+                            <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleJobsNearYou}> Current Location Jobs </Button>
                         </form>
                     </span>
                     <div className="JobData-Master">
                         <Grid container spacing={2}>
                             {allData.map(item => (
-                                <Grid item xl={4} xs={12} md={3}>
-                                    {/* on click open job description */}
-                                    <div className="jobField">
-                                        {/* key={item.id} */}
 
-                                        {/* <div className="jobField" onClick={e => console.log("Clicked")}>  */}
+                                <Grid item xl={4} xs={12} md={3}>
+                                    <div className="jobField">
                                         {/*{item.description}*/}
                                         <div className="CompanyImage">
                                             <img src={item.company_logo} alt="Company logo" className="ImageName"></img>
                                         </div>
-                                        
                                         <p className="JobType">{moment(item.created_at).fromNow()} . {item.type} </p>
                                         <p className="JobTitle">{item.title}</p>
                                         <p className="CompanyName">{item.company}</p>
                                         <p className="CompanyLocation">{item.location} </p>
-
+                                        <a href={item.url} className="Applyhere">Apply here</a>
+                                        {/* <a href="#lightbox-1" rel="lightbox" className="Applyhere">Open description</a>
+                                        <div class="lightbox" id="lightbox-1">
+                                            {item.description}
+                                        <a class="lightbox__close" href="{item}">X</a></div> */}
                                     </div>
                                 </Grid>
                             ))}
@@ -198,13 +214,6 @@ class App extends Component {
                      </Button>
                         </Box>
                     </div> : <div className="notFound">No Results Found..</div>}
-                    {/* <div className="LoadMoreDiv">
-                        <Box textAlign='center'>
-                            <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}>
-                                Load More
-                        </Button>
-                        </Box>
-                    </div> */}
                 </div>
             </ThemeProvider>
         );

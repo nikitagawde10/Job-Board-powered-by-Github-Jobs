@@ -110,23 +110,41 @@ We bind the functions to the Search Button’s onClick functionality to retrieve
 ### 4. Default user's location
 To default the user's location we're going to use the Javascript's API `navigator.geolocation`. So we write a condition in `componentDidMount()` to get the user's location accordingly. Do the following to access the user's location-
  1. Add the following state variables in our constructor `userLoc: true` `latitude: ''` and `longitude: ''`.
- 2. 
-            
- 2. Define the latitude and longitude string which will stored in `let latitude = '';` `let longitude = '';`
- 2. In `componentDidMount()` add to get the latitude and longitude of the user's location. We use `watchPosition()` because it attaches the handler function and executes itself as soon as the user changes their current location, returning the updated location properties for the user's new position.
+ 2. We will define an async-await function to handle our geolocation function `position()` because we have an asynchronous function inside of an async block. So let's say we need to fetch some data from our server and then use that data within our async block. We will use await to pause the function execution and resume after the data comes in
+```javascript
+position = async () => {
+        await navigator.geolocation.getCurrentPosition(
+            position => this.setState({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }, newState => console.log(newState))
+        );
+        console.log(this.state.latitude);
+        console.log(this.state.longitude);
+    };
+```
+ This will help us in storing the latitude and longitude of the user in a state variable and use it to fetch the API results. We will then call `position()` in our `componentDidMount()`.
+ 3. Now in our `render()` method we're going to create a button to search for jobs near the user's coordinates ie latitude and longitude and add a function called `handleJobsNearYou` on click. Then we will define the function as:
  ```javascript
- navigator.geolocation.watchPosition(function(position) {
-                latitiude = position.coords.latitude.toString();
-                console.log("Latitude is :", latitude);
+ handleJobsNearYou() {
+        const { latitude, longitude, } = this.state; //extract state variables to be used
 
-                longitude = position.coords.longitude.toString();
-                console.log("Longitude is :", longitude);
-  ```
-  3. The next step is to append the latitude and longitude in our targetUrl by doing the following:
-  ```javascript
-  targetUrl = targetUrl + "lat=" + position.coords.latitude.toString() + "&long=" + position.coords.longitude.toString();
-  ```
-  This will default the user's location and return job postings near his geolocation.
+        var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+            targetUrl = 'https://jobs.github.com/positions.json?';
+
+        // targetUrl = targetUrl + "lat=52.52008&long=13.4050"; // Berlin co-ordinates, will get you only Berlin jobs
+        targetUrl = targetUrl + "lat=" + latitude.toString() + "&long=" + longitude.toString();
+
+        fetch(proxyUrl + targetUrl)
+            .then(allData => allData.json())
+            .then(d => this.setState({ allData: d }))
+            .catch(e => {
+                console.log(e);
+                return e;
+            });
+    }
+ ```
+This will default the user's location and return job postings near his geolocation.
   
 ### 5. Implementing Pagination on Load More button
 * Initially in the constructor of App.js we assign the page number to be 0 which means that the first page to be displayed will be 0, the next page will be 1 and so on. The variable page will serve as a counter to decide how many pages are being displayed currently.

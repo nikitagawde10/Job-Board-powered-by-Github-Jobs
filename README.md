@@ -145,13 +145,18 @@ const newArray = allData.concat(previousSearches);
 
 ### 6. Displaying the Data
 * We’ve used components of Material UI to ease the CSS and provide uniformity and clean look to the entire website. These components include Button, Grid and Icons for search and location in the input fields. We used the default website breakpoints for the different screen sizes with a spacing of 2 between individual job posting as demonstrated in the image below.
-![GitHub Logo](/images/cssGridBox.png)
 
 * The CSS color scheme is used as defined in the requirements	
 1. Light Theme: Purple: #5865E0, Light Gray: #F5F6F8, White: #FFFFFF
 2. Dark Theme: Purple: #5865E0, Dark Blue: #131822, Light Blue: #19212D  
 
 * Some images displayed may be stretched due to the difference in dimensions of the image retrieved by the API. We also use CSS position and text formatting features to beautify the text and match the prototype. 
+* To display the timestamps of the job listing we use `Moment.js` a javascript library for parsing the dates.The API reponse includes the timestamp at which the listing was added, we're going to use that attribute `item.created_at` and pass it as a parameter to moment function 
+```javascript
+{moment(item.created_at).fromNow()}
+```
+and it will return the timestamp we need.
+![GitHub Logo](/images/cssGridBox.png)
 
 ### 7. Unit testing
 * We will use Jest to perform unit tests. Install jest using `npm install jest --save-dev`.

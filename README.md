@@ -156,7 +156,7 @@ const newArray = allData.concat(previousSearches);
 {moment(item.created_at).fromNow()}
 ```
 and it will return the timestamp we need.
-![GitHub Logo](/images/cssGridBox.png)
+![GitHub Logo](/images/cssGridBox1.png)
 
 ### 7. Unit testing
 * We will use Jest to perform unit tests. Install jest using `npm install jest --save-dev`.

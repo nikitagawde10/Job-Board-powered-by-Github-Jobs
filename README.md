@@ -107,7 +107,25 @@ if (fulltime === true) {
 ```
 We bind the functions to the Search Button’s onClick functionality to retrieve the postings.
 
-### 4. Implementing Pagination on Load More button
+### 4. Default user's location
+To default the user's location we're going to use the Javascript's API `navigator.geolocation`. So we write a condition in `componentDidMount()` to get the user's location accordingly. Do the following to access the user's location-
+ 1. Define the latitude and longitude string which will stored in `let latitude = '';` `let longitude = '';`
+ 2. In `componentDidMount()` add to get the latitude and longitude of the user's location. We use `watchPosition()` because it attaches the handler function and executes itself as soon as the user changes their current location, returning the updated location properties for the user's new position.
+ ```javascript
+ navigator.geolocation.watchPosition(function(position) {
+                latitiude = position.coords.latitude.toString();
+                console.log("Latitude is :", latitude);
+
+                longitude = position.coords.longitude.toString();
+                console.log("Longitude is :", longitude);
+  ```
+  3. The next step is to append the latitude and longitude in our targetUrl by doing the following:
+  ```javascript
+  targetUrl = targetUrl + "lat=" + position.coords.latitude.toString() + "&long=" + position.coords.longitude.toString();
+  ```
+  This will default the user's location and return job postings near his geolocation.
+  
+### 5. Implementing Pagination on Load More button
 * Initially in the constructor of App.js we assign the page number to be 0 which means that the first page to be displayed will be 0, the next page will be 1 and so on. The variable page will serve as a counter to decide how many pages are being displayed currently.
 * If the user wants to see more posting, the Load More button will be clicked and it will increase the page counter to one and then append that to the targetUrl which will display the job listings for the next page given by the API.
 
@@ -125,7 +143,7 @@ const newArray = allData.concat(previousSearches);
    }
 ```
 
-### 5. Displaying the Data
+### 6. Displaying the Data
 * We’ve used components of Material UI to ease the CSS and provide uniformity and clean look to the entire website. These components include Button, Grid and Icons for search and location in the input fields. We used the default website breakpoints for the different screen sizes with a spacing of 2 between individual job posting as demonstrated in the image below.
 ![GitHub Logo](/images/cssGridBox.png)
 
@@ -135,7 +153,7 @@ const newArray = allData.concat(previousSearches);
 
 * Some images displayed may be stretched due to the difference in dimensions of the image retrieved by the API. We also use CSS position and text formatting features to beautify the text and match the prototype. 
 
-### 6. Unit testing
+### 7. Unit testing
 * We will use Jest to perform unit tests. Install jest using `npm install jest --save-dev`.
 * We also have to make changes to package.json file to configure Jest. Under the scripts attribute, edit the test command to include jest. We add coverage to show what percentage of coverage(graphical representation) does the unit test provide for the components rendering. `"test":"jest --coverage",`
 * In the App.test.js file we add a sample test to check whether our Jest is configured correctly. To do that, add the following code snippet and then type the command `npm run test` in the terminal
@@ -229,7 +247,7 @@ describe('Check rendering', () => {
   	  })
 	```
 
-### 7. Light/Dark Theme Toggle
+### 8. Light/Dark Theme Toggle
 * To implement the light/dark theme toggle we'll begin by installing the styled components package using `npm i styled-components`.Styled-components is a CSS-in-JS library lets you use all of the features of CSS that you love, including media queries, pseudo-selectors, and nesting. 
 * They provide full theming support by exporting a `<ThemeProvider>` wrapper components within itself. We will create 2 new files in a `themes` folder called `theme.js` and `global.js`. The file theme.js will include variables for our dark and light modes
 ```javascript
@@ -293,10 +311,10 @@ toggleTheme() {
 
 
 
-### 8. Uploading the folder on Github
+### 9. Uploading the folder on Github
 Upload the project to Github so it can be accessed by netlify for deployment. Do not include node_modules folder and .gitignore file.
 
-### 9. Deploying the application
+### 10. Deploying the application
 * We register for an account on netlify.com and link the Github account for accessing the repository. 
 * In the options provided we select the repository name and add the name of website “Job-Board-Powered-By-Github-Jobs” in the /build input field. This will be the name of the website. 
 * After clicking on deploy give it a few minutes and then the link will be live. You can visit the link at http://Job-Board-Powered-By-Github-Jobs.netlify.app

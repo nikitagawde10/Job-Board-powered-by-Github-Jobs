@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-  body & .JobData-Master{
+  body & .JobData-Master{                               //body and nested class JobData-Master
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};    
     transition: all 0.25s linear;
   }
-  body & {
+  body & {                                              //body and nested span class
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};    
     transition: all 0.25s linear;

@@ -2,11 +2,11 @@ import './App.css';
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Test from './Test.js'
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import moment from 'moment';
+// import Test from './Test.js'
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themes/theme';
 import { GlobalStyles } from './themes/global';
@@ -39,7 +39,7 @@ class App extends Component {
         this.handleJobsNearYou = this.handleJobsNearYou.bind(this);
     }
     position = async () => {
-        await navigator.geolocation.getCurrentPosition(
+         navigator.geolocation.getCurrentPosition(
             position => this.setState({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
@@ -161,12 +161,14 @@ class App extends Component {
             <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
                 <GlobalStyles />
                 <div className="App">
+                    {/* header divs */}
                     <div className="Header-Box">
                         <button onClick={this.toggleTheme} className="toggleBtn">Toggle theme</button>
                         <div className="devjobs">
                             <span id="title">devjobs</span>
                         </div>
                     </div>
+                    {/* search bar divs */}
                     <span>
                         <form className="searchForm">
                             <SearchIcon id="searchIcon" />
@@ -185,6 +187,7 @@ class App extends Component {
                             <Button variant="contained" id="submitBtn" color="primary" onClick={this.handleJobsNearYou}> Current Location Jobs </Button>
                         </form>
                     </span>
+                    {/* displaying jobs */}
                     <div className="JobData-Master">
                         <Grid container spacing={2}>
                             {allData.map(item => (
@@ -199,17 +202,18 @@ class App extends Component {
                                         <p className="JobTitle">{item.title}</p>
                                         <p className="CompanyName">{item.company}</p>
                                         <p className="CompanyLocation">{item.location} </p>
-                                        {/* <a href={item.url} className="Applyhere">Apply here</a> */}
-                                        <a href="#lightbox-1" rel="lightbox" className="Applyhere">Open description</a>
+                                        <a href={item.url} className="Applyhere">Apply here</a>
+                                        {/* <a href="#lightbox-1" rel="lightbox" className="Applyhere">Open description</a>
                                         <div class="lightbox" id="lightbox-1">
                                             {/* {item.description} */}
-                                            <Test/>
-                                        <a class="lightbox__close" href="{item}">X</a></div>
+                                            {/* <Test data={item}/>
+                                        <a class="lightbox__close" href="{item}">X</a></div>  */}
                                     </div>
                                 </Grid>
                             ))}
                         </Grid>
                     </div>
+                    {/* displaying load more button for pagination */}
                     {allData.length > 0 ? <div className="LoadMoreDiv">
                         <Box textAlign='center'>
                             <Button variant='contained' id="loadBtn" color="primary" onClick={this.handleLoadMore}> Load More

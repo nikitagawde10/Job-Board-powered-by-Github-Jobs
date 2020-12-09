@@ -1,8 +1,10 @@
 import React from 'react'
-class Test extends React.Component{
-render(){
-    return(<h1>Hi</h1>)
+const Test = (item) =>{
+    return(
+        <div className="jobDescription">
+            
+        </div>
+    )
 }
 
-}
 export default Test;
